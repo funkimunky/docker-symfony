@@ -10,10 +10,10 @@ services:
     php:
         build: ./php-fpm
         expose:
-            - "9000"
+            - "9001"
         volumes:
             - ./symfony:/var/www/symfony
-            - ./logs/symfony:/var/www/symfony/var/logs
+            - ./logs/symfony:/var/www/symfony/var/log
         links:
             - db
     nginx:
