@@ -17,10 +17,11 @@ services:
         volumes:
             - ./symfony:/var/www/symfony:cached
             - ./logs/symfony:/var/www/symfony/var/log:cached
+            - ./logs/xdebug:/var/log/xdebug:cached
         links:
             - db
         extra_hosts:
-            - "docker-host.localhost:127.0.0.1"
+            - "docker-host.localhost:172.17.0.1"    
     nginx:
         build: ./nginx
         ports:
@@ -29,7 +30,7 @@ services:
             - php
         volumes:
             - ./logs/nginx:/var/log/nginx:cached
-            - ./symfony:/var/www/symfony:cached
+            - ./symfony:/var/www/symfony:cached            
     elk:
         image: willdurand/elk
         ports:
