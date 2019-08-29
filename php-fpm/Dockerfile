@@ -2,7 +2,8 @@ FROM alpine:3.8
 
 LABEL maintainer="Vincent Composieux <vincent.composieux@gmail.com>"
 
-RUN apk add --update \
+RUN apk add --update --no-cache \
+    coreutils \
     php7-fpm \
     php7-apcu \
     php7-ctype \
@@ -30,19 +31,22 @@ RUN apk add --update \
     php7-xdebug \
     php7-xmlwriter \
     php7-zip \
+    php7-xmlwriter \
     make \
     curl \
     nodejs \
     yarn
 
-RUN rm -rf /var/cache/apk/* && rm -rf /tmp/* && \
-    curl --insecure https://getcomposer.org/composer.phar -o /usr/bin/composer && chmod +x /usr/bin/composer
+RUN echo "$(curl -sS https://composer.github.io/installer.sig) -" > composer-setup.php.sig \
+        && curl -sS https://getcomposer.org/installer | tee composer-setup.php | sha384sum -c composer-setup.php.sig \
+        && php composer-setup.php && rm composer-setup.php* \
+        && chmod +x composer.phar && mv composer.phar /usr/bin/composer
 
-ADD symfony.ini /etc/php7/conf.d/
-ADD symfony.ini /etc/php7/cli/conf.d/
-ADD xdebug.ini  /etc/php7/conf.d/
+COPY symfony.ini /etc/php7/conf.d/
+COPY symfony.ini /etc/php7/cli/conf.d/
+COPY xdebug.ini  /etc/php7/conf.d/
 
-ADD symfony.pool.conf /etc/php7/php-fpm.d/
+COPY symfony.pool.conf /etc/php7/php-fpm.d/
 
 CMD ["php-fpm7", "-F"]
 
