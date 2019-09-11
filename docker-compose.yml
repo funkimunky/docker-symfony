@@ -21,7 +21,8 @@ services:
         links:
             - db
         extra_hosts:
-            - "docker-host.localhost:172.17.0.1"    
+            # - "docker-host.localhost:192.168.1.92"    
+            - "docker-host.localhost:192.168.43.249" 
     nginx:
         build: ./nginx
         ports:
