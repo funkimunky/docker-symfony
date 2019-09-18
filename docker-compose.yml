@@ -21,8 +21,13 @@ services:
         links:
             - db
         extra_hosts:
-            - "docker-host.localhost:192.168.1.92"    
+            # laptop dell
+            - "docker-host.localhost:192.168.1.92" 
+            # mobile tether   
             # - "docker-host.localhost:192.168.43.249" 
+            # games machine
+            # - "docker-host.localhost:192.168.1.139"
+            
     nginx:
         build: ./nginx
         ports:
