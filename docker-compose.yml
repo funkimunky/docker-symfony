@@ -21,8 +21,12 @@ services:
         links:
             - db
         extra_hosts:
-            - "docker-host.localhost:192.168.1.92"    
+            # home
+            # - "docker-host.localhost:192.168.1.92" 
+            # hotspot   
             # - "docker-host.localhost:192.168.43.249" 
+            # mum and dads network
+            - "docker-host.localhost:192.168.1.130"            
     nginx:
         build: ./nginx
         ports:
