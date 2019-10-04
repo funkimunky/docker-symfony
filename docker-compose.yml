@@ -21,12 +21,13 @@ services:
         links:
             - db
         extra_hosts:
-            # home
-            # - "docker-host.localhost:192.168.1.92" 
-            # hotspot   
+            # laptop dell
+            - "docker-host.localhost:192.168.1.92" 
+            # mobile tether   
             # - "docker-host.localhost:192.168.43.249" 
-            # mum and dads network
-            - "docker-host.localhost:192.168.1.130"            
+            # games machine
+            # - "docker-host.localhost:192.168.1.139"
+            
     nginx:
         build: ./nginx
         ports:
